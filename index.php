@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Chester Banaszak - Portfolio and Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solutions-focused I.T. Engineer and Developer with a unique background in large and small business, professional consulting, and healthcare enterprises.">
+    <meta name="author" content="Chester Banaszak">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/flexslider/flexslider.css" type="text/css" media="screen" />
+	<link href="assets/css/style.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+  </head>
+
+  <body>
+<?php
+include_once("analyticstracking.php");
+if(isset($_POST['submitted'])) {
+	if(!empty($_POST['YourName']) && !empty($_POST['YourEmail']) && !empty($_POST['YourMessage'])) {
+		echo '<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+				<strong>Thank you!</strong> Your message is important to me, I appreciate your time, and will get back to you very soon.
+			</div>';
+		$yourname = htmlentities(strip_tags($_POST['YourName']));
+		$youremail = htmlentities(strip_tags($_POST['YourEmail']));
+		$yourmessage = htmlentities(strip_tags($_POST['YourMessage']));
+		require('assets/sendgrid-php/sendgrid-php.php');
+		$sendgrid = new SendGrid('cjbanaszak', '1999swib44');
+		$email = new SendGrid\Email();
+		$email->addTo('cjbanaszak@gmail.com')->
+			setFrom('email@hirechester.com')->
+			setReplyTo($youremail)->
+			setFromName($yourname)->
+			setSubject('Request from Hire Chester')->
+			setHtml($yourmessage);
+		$sendgrid->send($email);
+	} else {
+		echo '<div class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+				<strong>Error!</strong> You forgot to fill out some fields! <a href="#contact" class="alert-link">Click here to scroll back down to the form.</a>
+			</div>';
+	}
+}
+?>
+		<section class="container">
+
+			<header class="row-fluid">
+				<div class="title span8">
+					<img class="profile" src="assets/img/photo.jpg" />
+					<h1>Chester Banaszak</h1>
+					<h2>Engineer &amp; Developer</h2>
+				</div>
+				<div class="social offset1 span3">
+					<ul>
+						<li><i class="fa fa-phone-square"></i> <a href="tel:+14047987670">(404) 798-7670</a></li>
+						<li><i class="fa fa-envelope"></i> <a href="mailto:cjbanaszak@gmail.com?subject=Hi, I Saw Your Portfolio and Want to Chat">cjbanaszak@gmail.com</a></li>
+						<li><i class="fa fa-linkedin"></i> <a href="http://www.linkedin.com/in/cjbanaszak" target="_blank">LinkedIn: cjbanaszak</a></li>
+					</ul>
+				</div>	
+			</header>
+
+			<article class="row-fluid">
+				<header class="span3">
+					<h3>Executive<br />Summary</h3>
+				</header>
+				<div class="span9">
+					<p class="welcome">Solutions-focused Systems Administrator and Web Developer with a unique background in large and small business, 
+					professional consulting, and healthcare enterprises. Proven track record in successfully examining an 
+					organization’s critical support requirements, recognizing deficiencies and potential opportunities, and 
+					developing advanced solutions for increasing reliability and improving efficiency. Seeking career 
+					openings to assist organizations in designing, managing, deploying, and maintaining information 
+					technology assets to generate measurable business results.</p>
+				</div>
+			</article>
+
+			<article class="row-fluid">
+				<header class="span3">
+					<h3>Core <br />Competencies</h3>
+				</header>
+				<div class="span9">
+					<div class="row-fluid skills">
+						<ul class="span4">
+							<li>Windows Server 2003, 2008</li>
+							<li>Windows 2000, XP, Vista, 7, 8</li>
+							<li>Mac OS X 10.7, 10.8, 10.9</li>
+							<li>Microsoft Exchange 2003, 2007</li>
+							<li>Office 2003, 2007, 2010, 2013</li>
+						</ul>
+						<ul class="span4">
+							<li>Adobe Creative Suite 6</li>
+							<li>CSS3, HTML5, XML</li>
+							<li>JavaScript, jQuery</li>
+							<li>PHP, MySQL</li>
+							<li>Wordpress, Drupal, Kirby</li>
+						</ul>
+						<ul class="span4">
+							<li>VMware vSphere 5, View, Veeam</li>
+							<li>Apple iOS, Android</li>
+							<li>Google Apps for Business, Postini</li>
+							<li>Fortinet, SonicWall</li>
+							<li>Ricoh, Lanier, Konica, eCopy</li>
+						</ul>
+					</div>
+				</div>
+			</article>
+
+			<article class="row-fluid">
+				<header class="span3">
+					<h3>Professional<br />Experience</h3><br />
+					<a onclick="showWork();" href="javascript:void(0);">Show All</a>
+				</header>
+				<div class="span9">
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseCNN">
+										CNN/Turner Broadcasting
+									</a>
+								</h4>
+							</div>
+							<div id="collapseCNN" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Broadcast I.T. Specialist (2 Years, present)</em><br />
+									<p>Execute, configure, and optimize multiple satellite feeds/receive links for audio and video quality. Monitor and adjust on-air signals, co-ordinate incoming video/audio signals with multiple clients/customers to ensure on air and recording quality. Dub, cache, and verify the quality of commercial, promotions, interstitials, public service announcements, and program or related material in order to prepare it for broadcast on all networks. Develop an understanding of the broadcast systems, facility, workflow and processes. Display a high level of understanding in cabling, connectivity and equipment installation and repair. Exhibit the initiative to properly complete tasks in a timely and professional manner with minimal oversight.</p>
+									<em>Projects:</em><br />
+									<p>X75 Removal &amp; Replacement: Completed the removal of old Leitch X75 processing amplifiers that were used to broadcast incoming signals into CNN Center. Replaced the equipment with new Harris Selenio frames to consolidate the amount of physical footprint, upgrade the technology to synchronize remote feeds, and switch any older SD inbound lines to HD paths.</p>
+									<p>Dev, Ref, QA Environments for CNN DRE: In complex technical systems, such as CNN's Digital Record and Edit systems which are comprised of multiple components and integration points, it is beneficial to have additional systems that are identical or similar to those that are used in production. Having the proper environments available provides teams with a means to perform their work efficiently, minimizing resource conflicts and the time-consuming and risky process of reconfiguring hardware and software for various scenarios. Because these systems can be costly, this project will initially seek to design, install, configure, and implement one new environment designated for QA.</p>
+									<p>CNN International HD Master Control Upgrade: Ran and terminated HD-SDI, Ethernet, serial, and audio cables throughout CNN's Atlanta facility to connect three new Master Control pods (Asia, Latin America, and Europe) for HD quality broadcast. Created a temporary workspace for International longform SD content ingest and review, which consisted of several Sony Betacam tape decks and Harris routers. Assisted in other preparations for additional related projects, including CNNI HD commercial ingest and control rooms.</p>
+									<p>BEST Command Center Web Portal: Designed and implemented an intranet portal that provided our engineering group with resources for accessing our reference documents and procedures, links to video trainings and enterprise software for managing video feeds, and keeping an updated contact list for our support clients. In addition to the designing the web portal, procedure documents for Quality Control and Commercial Ingest were re-written and updated.</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseDFP">
+										Digital Frontier Plus
+									</a>
+								</h4>
+							</div>
+							<div id="collapseDFP" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Freelance Web Designer and Developer (9 Months, present)</em><br />
+									<p>Worked with clients to understand their needs and wants and propose possible solutions</p>
+									<p>Managed multiple concurrent projects to deliver finished products on-time</p>
+									<p>Prepared and delivered project estimates, proposals and presentations</p>
+									<p>Developed and maintained client websites to improve their online presence with better SEO</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseGTC">
+										Greenbriar Treatment Center
+									</a>
+								</h4>
+							</div>
+							<div id="collapseGTC" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Assistant I.T. Manager (3 Years)</em><br />
+									<p>Provided support in managing a network consisting of 100 users spread across 12 sites throughout the Greater Pittsburgh area. Primarily responsible for maintaining the company's primary servers– ranging from Active Directory, Exchange, RightFax, file/print, Openfire, IIS, VMWare vSphere, View, Veeam, Fortis, and CORE Solutions Cx360 EHR– at our data center location and providing primary desktop maintenance to local and remote users.</p>
+									<em>Projects:</em><br />
+									<p>Server and desktop virtualization for all users with a VMware backbone (vSphere, Veeam, View, ThinApp)</p>
+									<p>Completely upgraded user base with applications for Windows Server 2008, Google Apps, and Office</p></p>
+									<p>Tightened HIPAA network compliance across the network with a new electronic policies procedure</p>
+									<p>Re-designed and re-branded Greenbriar’s web presence with a new layout and social connectivity</p>
+									<p>Led the project to rollout new Android smartphones to company administrators and managed them</p>
+									<p>Replaced the entire fleet of copiers with Ricoh models and synchronized them with our email/fax system</p>
+									<p>Standardized data service providers at all locations and connected them through Fortinet VPN tunnels</p>
+									<p>Implemented a local instant messaging application based on a Jabber client and server (Openfire)</p>
+									<p>Assisted in the rollout of a Panasonic KX-TDA digital hybrid IP-PBX system for the in-patient location</p>
+									<p>Coded a PHP/SQL appointment scheduling system to handle new client admissions and medical histories</p>
+									<p>Upgraded to an electronic health records application to replace our paper records system using CORE Solutions' Cx360 which had a MS SQL back-end and Crystal Reports engine</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseJup">
+										Jupiter-2, Inc.
+									</a>
+								</h4>
+							</div>
+							<div id="collapseJup" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Network Engineer (1 Year, 3 Months)</em><br />
+									<p>Provided I.T. consulting and solutions, working in a variety of network environments. Worked both as the primary service provider and as the next level of support for my client’s own I.T. staff. Installed, configured, and troubleshooted: routers, firewalls, switches, servers, PCs and other network equipment, as well as having a working knowledge of backup systems, SQL, VPN, LAN, WAN, and wireless networking. Presented pre-sale technical support and developed I.T. solutions to fit a customer’s business needs.</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseSwP">
+										Sherwin-Williams
+									</a>
+								</h4>
+							</div>
+							<div id="collapseSwP" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Systems Administrator Co-Op (1 Year)</em><br />
+									<p>General responsibilities at Sherwin-Williams included performing routine administrative tasks, reporting on server monitoring and statuses, identifying trends based on data analysis, troubleshooting Windows servers and related issues, and extracting data using Excel, Access, and Bash programming.</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseJCU">
+										John Carroll University
+									</a>
+								</h4>
+							</div>
+							<div id="collapseJCU" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Network Support Technician (1 Year)</em><br />
+									<p>One of several students employed on work-study to fix and repair student computers. Troubleshooting viruses and malware was the bulk of the job and virus removal was the end result. Employment also included going around campus to fix network port issues in the residence halls.</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseChart">
+										Chart Industries
+									</a>
+								</h4>
+							</div>
+							<div id="collapseChart" class="panel-collapse collapse">
+								<div class="panel-body">
+									<em>Corporate I.T. Intern (1 Year)</em><br />
+									<p>Interned at Chart Industries’ headquarters over the school year and summer of 2005. Headed a project to implement and maintain thirty computers in the corporate office. Participated in hands-on server rebuilds, sat in on vendor and worldwide I.T. meetings, and assisted on the SharePoint project for the company’s extranet.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article class="row-fluid">
+				<header class="span3">
+					<h3>Education &amp;<br/>Professional Certifications</h3>
+				</header>
+				<div class="span9">
+					<img src="assets/img/A+_CE_small.png" style="margin-bottom: 20px;" title="CompTIA A+ Certified" />
+					<h4>John Carroll University</h4>
+					<h5>2005-2009 B.A., Sociology, Computer Science</h5>
+					<p>Majored in Sociology, but also minored in Computer Science and concentrated in Catholic Studies. Inducted as a scholar of the International Sociology Honors Society (Alpha Kappa Delta). Volunteered in New Orleans on five separate occasions following the aftermath of Hurricane Katrina. Member of Circle K International, Student Union Senator, Habitat for Humanity, Knights of Columbus, and the JCU College Democrats. Co-led a Christian Life Community of ten people. Acted as president for one semester of both the Sociology Student Association and Circle K International.</p>
+				</div>
+			</article>
+
+	  		<article class="row-fluid" id="contact">
+				<header class="span3">
+					<h3>Contact Me</h3>
+				</header>
+				<div class="span9">
+					<form role="form" method="POST">
+						<div class="form-group">
+							<input type="text" class="form-control" name="YourName" placeholder="Your Name" value="<?php echo $_POST["YourName"]; ?>" />
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="YourEmail" placeholder="Your Email" value="<?php echo $_POST["YourEmail"]; ?>" />
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" name="YourMessage" rows="3" placeholder="Your Message"><?php echo $_POST["YourMessage"]; ?></textarea>
+						</div>
+						<input type="hidden" name="submitted" value="TRUE" />
+						<button type="submit" class="btn btn-default">Send</button>
+					</form>
+				</div>
+			</article>
+
+	  		<article class="row-fluid">
+				<header class="span3">
+					<h3>Portfolio</h3>
+				</header>
+				<div class="span9">
+					<div id="slider" class="flexslider">
+						<ul class="slides">
+							<?php
+								foreach (glob("assets/img/portfolio/*.png") as $filename) {
+									echo "<li><img src=" . $filename . " /></li>" . "\n";
+								}
+							?>
+						</ul>
+					</div>
+					<div id="carousel" class="flexslider">
+						<ul class="slides">
+							<?php
+								foreach (glob("assets/img/portfolio/*.png") as $filename) {
+									echo "<li><img src=" . $filename . " /></li>" . "\n";
+								}
+							?>
+						</ul>
+					</div>
+				</div>
+			</article>
+
+			<footer>
+				&copy;<?php echo date("Y"); ?> Chester Banaszak | 
+				<a href="resume.pdf">Download as PDF</a> | <a href="#top">To top <i class="fa fa-arrow-up"></i></a>
+			</footer>
+			
+	</section>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	<script src="assets/flexslider/jquery.flexslider.js"></script>
+	<script src="assets/js/main.js"></script>
+	</body>
+</html>
